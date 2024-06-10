@@ -21,7 +21,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// hui putka
-
 $conn->close();
 ?>
