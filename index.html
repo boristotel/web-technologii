@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Editor</title>
+</head>
+<body>
+    <h1>Data Editor</h1>
+    <form action="insert_server.php" method="POST">
+        <label for="mac_address">MAC Address:</label>
+        <input type="text" id="mac_address" name="mac_address"><br><br>
+
+        <label for="physical_location">Physical Location:</label>
+        <input type="text" id="physical_location" name="physical_location"><br><br>
+
+        <label for="mgmt_type">Management Type:</label>
+        <input type="text" id="mgmt_type" name="mgmt_type"><br><br>
+
+        <label for="admin_email">Admin Email:</label>
+        <input type="email" id="admin_email" name="admin_email"><br><br>
+
+        <label for="ip">IP Address:</label>
+        <input type="text" id="ip" name="ip"><br><br>
+
+        <label for="web_url">Web URL:</label>
+        <input type="text" id="web_url" name="web_url"><br><br>
+
+        <label for="user">User:</label>
+        <input type="text" id="user" name="user"><br><br>
+
+        <label for="pass">Password:</label>
+        <input type="password" id="pass" name="pass"><br><br>
+
+        <input type="submit" value="Insert Server">
+    </form>
+
+    <form action="update_server.php" method="POST">
+        <label for="id">Server ID:</label>
+        <input type="text" id="id" name="id"><br><br>
+
+        <!-- Repeat the fields as above for updating -->
+
+        <input type="submit" value="Update Server">
+    </form>
+</body>
+</html>
