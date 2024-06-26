@@ -32,6 +32,7 @@ $conn->close();
 </head>
 <body>
     <h1>Welcome, <?php echo $_SESSION['username']; ?></h1>
+    <a href="logout.php">Logout</a>
     <h2>Your Containers</h2>
     <table border="1">
         <tr>
