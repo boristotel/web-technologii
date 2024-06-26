@@ -1,42 +1,72 @@
 <?php
-function checkWebsiteStatus($url) {
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_NOBODY, true);
-    curl_setopt($ch, CURLOPT_TIMEOUT, 5);
-    curl_exec($ch);
-    $httpcode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    curl_close($ch);
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: index.html");
+    exit();
+}
 
-    if ($httpcode >= 200 && $httpcode < 300) {
-        return true;
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "docker_management";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
+
+function check_status($ip, $port) {
+    $connection = @fsockopen($ip, $port);
+    if (is_resource($connection)) {
+        fclose($connection);
+        return 'Running';
     } else {
-        return false;
+        return 'Down';
     }
 }
 
-function ping($host, $timeout = 1) {
-    $output = [];
-    $status = -1;
-    $result = exec("ping -n 1 -w {$timeout} {$host}", $output, $status);
-    return $status === 0;
-}
+$user_id = $_SESSION['user_id'];
+$sql = "SELECT * FROM containers WHERE user_id='$user_id'";
+$result = $conn->query($sql);
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $type = $_POST['type'];
-    $address = $_POST['address'];
-
-    if ($type == 'website') {
-        if (checkWebsiteStatus($address)) {
-            echo "The website is online.";
-        } else {
-            echo "The website is offline.";
-        }
-    } elseif ($type == 'container') {
-        if (ping($address)) {
-            echo "The container is online.";
-        } else {
-            echo "The container is offline.";
-        }
+$status_report = [];
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+        $status = check_status($row['container_ip'], $row['port']);
+        $status_report[] = [
+            'name' => $row['dns_name'],
+            'status' => $status
+        ];
     }
 }
+
+$conn->close();
 ?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Status Report</title>
+</head>
+<body>
+    <h1>Status Report</h1>
+    <table border="1">
+        <tr>
+            <th>Container Name</th>
+            <th>Status</th>
+        </tr>
+        <?php
+        foreach ($status_report as $report) {
+            echo "<tr>
+                <td>".$report['name']."</td>
+                <td>".$report['status']."</td>
+            </tr>";
+        }
+        ?>
+    </table>
+    <a href="user_home.php">Back to Home</a>
+</body>
+</html>
