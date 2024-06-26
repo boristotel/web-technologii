@@ -9,7 +9,7 @@ USE docker_management;
         id INT AUTO_INCREMENT PRIMARY KEY,
         username VARCHAR(255) NOT NULL UNIQUE,
         password VARCHAR(255) NOT NULL,
-        email VARCHAR(255) NOT NULL UNIQUE
+        email VARCHAR(255) NOT NULL UNIQUE,
         role ENUM('admin', 'user') NOT NULL DEFAULT 'user'
     );
 
@@ -50,4 +50,8 @@ CREATE TABLE virtual_machines (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
+INSERT INTO users (username, password, email, role) VALUES
+('admin', '$2y$10$7QOa/p3b7FQm9.pOUZReXeVO/nZp3RAkTPi7rQ9mKQO7D/8RXBQ9m', 'admin@example.com', 'admin'), --admin: adminpassword
+('user1', '$2y$10$8zmd9F6zSh49OMH7r4uU1.9hOo9vH24/3fgfd3O8FXR/ie.0iD7.y', 'user1@example.com', 'user'), -- user1: user1password
+('user2', '$2y$10$ttRpi7TfsXQGgV45k/QXLe29vH24gHgFYi3VO7F/ieKqXY7xWQ9WO', 'user2@example.com', 'user'); -- user2: user2password
 

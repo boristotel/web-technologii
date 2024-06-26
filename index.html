@@ -3,9 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        h1 {
+            margin-top: 50px;
+        }
+        .button-container {
+            margin-top: 20px;
+        }
+        .button-container a {
+            display: inline-block;
+            padding: 15px 30px;
+            margin: 0 10px;
+            text-decoration: none;
+            background-color: #007BFF;
+            color: white;
+            border-radius: 8px;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        .button-container a:hover {
+            background-color: rgb(88, 166, 235);
+            transform: scale(1.1);
+        }
+        header {
+            margin-top: 0px; 
+            padding: 50px 0; 
+            background-color: rgb(88, 166, 235);
+            font-size: 25px;
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto; /* Center the container horizontally */
+            padding: 30px;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease;
+        }
+        .container:hover {
+            background-color: rgb(88, 166, 235);
+            color: #ffffff; 
+        }
+
+        .container h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .container p {
+            font-size: 1.2em;
+            line-height: 1.6;
+        }
+        .container li{
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
-    <h1>Welcome</h1>
-    <a href="register.html">Register</a> | <a href="login.html">Login</a>
+    <header>
+        <h3> Welcome to the system for manage containers and web-servers </h3>
+    </header>
+    <h3>What will you find here?</h3>
+    <div class="container">
+        <h2>Our Functionality</h2>
+        <p> Login or Register and you will be able to explore the fun of working with containers! </p>
+        <p>Functionalities:</p>
+        <ul>
+            <li>Creating Image for running Containers</li>
+            <li>Starting Web-servers</li>
+            <li>Running Virtual-Machines</li>
+        </ul>
+    </div>
+    <div class="button-container">
+        <a href="register.html">Register</a>
+        <a href="login.html">Login</a>
+    </div>
 </body>
 </html>
