@@ -25,8 +25,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $db_name = $_POST['db_name'];
     $server_ip = $_POST['server_ip'];
     $container_ip = $_POST['container_ip'];
+    $vhost_ip = $_POST['vhost_ip'];
+    $vhost_path = $_POST['vhost_path'];
+    $settings = $_POST['settings'];
 
-    $sql = "UPDATE containers SET dns_name='$dns_name', port='$port', db_name='$db_name', server_ip='$server_ip', container_ip='$container_ip' WHERE id='$id'";
+    $sql = "UPDATE containers SET dns_name='$dns_name', port='$port', db_name='$db_name', server_ip='$server_ip', container_ip='$container_ip', vhost_ip='$vhost_ip', vhost_path='$vhost_path', settings='$settings' WHERE id='$id'";
 
     if ($conn->query($sql) === TRUE) {
         header("Location: user_home.php");

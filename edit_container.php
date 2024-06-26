@@ -50,6 +50,12 @@ $conn->close();
         <input type="text" id="server_ip" name="server_ip" value="<?php echo $container['server_ip']; ?>" required><br>
         <label for="container_ip">Container IP:</label>
         <input type="text" id="container_ip" name="container_ip" value="<?php echo $container['container_ip']; ?>" required><br>
+        <label for="vhost_ip">VHost IP:</label>
+        <input type="text" id="vhost_ip" name="vhost_ip" value="<?php echo $container['vhost_ip']; ?>"><br>
+        <label for="vhost_path">VHost Path:</label>
+        <input type="text" id="vhost_path" name="vhost_path" value="<?php echo $container['vhost_path']; ?>"><br>
+        <label for="settings">Settings:</label>
+        <textarea id="settings" name="settings"><?php echo $container['settings']; ?></textarea><br>
         <button type="submit">Update Container</button>
     </form>
 </body>

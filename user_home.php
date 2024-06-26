@@ -54,7 +54,8 @@ $conn->close();
                     <td>".$row['container_ip']."</td>
                     <td>
                         <a href='edit_container.php?id=".$row['id']."'>Edit</a> |
-                        <a href='delete_container.php?id=".$row['id']."'>Delete</a>
+                        <a href='delete_container.php?id=".$row['id']."'>Delete</a> |
+                        <a href='generate_dockerfile.php?id=".$row['id']."'>Generate Dockerfile</a>
                     </td>
                 </tr>";
             }
