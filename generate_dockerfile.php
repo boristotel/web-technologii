@@ -43,8 +43,9 @@ if ($container['settings']) {
     $dockerfile .= "ENV SETTINGS=\"" . $container['settings'] . "\"\n";
 }
 
-// Create a directory for the container
-$directory = 'dockerfiles/' . $container['id'];
+// Create a directory for the container using the container name
+$container_name_safe = preg_replace('/[^a-zA-Z0-9_-]/', '_', $container['dns_name']);
+$directory = 'dockerfiles/' . $container_name_safe;
 if (!is_dir($directory)) {
     mkdir($directory, 0777, true);
 }
