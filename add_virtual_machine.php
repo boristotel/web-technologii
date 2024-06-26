@@ -20,14 +20,10 @@ if ($conn->connect_error) {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_id = $_SESSION['user_id'];
-    $dns_name = $_POST['dns_name'];
-    $port = $_POST['port'];
-    $db_name = $_POST['db_name'];
-    $vhost_ip = $_POST['vhost_ip'];
-    $vhost_path = $_POST['vhost_path'];
-    $settings = $_POST['settings'];
+    $ip = $_POST['ip'];
+    $data = $_POST['data'];
 
-    $sql = "INSERT INTO websites (user_id, dns_name, port, db_name, vhost_ip, vhost_path, settings) VALUES ('$user_id', '$dns_name', '$port', '$db_name', '$vhost_ip', '$vhost_path', '$settings')";
+    $sql = "INSERT INTO virtual_machines (user_id, ip, data) VALUES ('$user_id', '$ip', '$data')";
 
     if ($conn->query($sql) === TRUE) {
         header("Location: user_home.php");

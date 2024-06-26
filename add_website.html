@@ -8,15 +8,17 @@
     <h1>Add Website</h1>
     <form action="add_website.php" method="post">
         <label for="dns_name">DNS Name:</label>
-        <input type="text" id="dns_name" name="dns_name"><br>
+        <input type="text" id="dns_name" name="dns_name" required><br>
         <label for="port">Port:</label>
-        <input type="text" id="port" name="port"><br>
+        <input type="text" id="port" name="port" required><br>
         <label for="db_name">DB Name:</label>
-        <input type="text" id="db_name" name="db_name"><br>
-        <label for="server_ip">Server IP:</label>
-        <input type="text" id="server_ip" name="server_ip"><br>
-        <label for="container_ip">Container IP:</label>
-        <input type="text" id="container_ip" name="container_ip"><br>
+        <input type="text" id="db_name" name="db_name" required><br>
+        <label for="vhost_ip">VHost IP:</label>
+        <input type="text" id="vhost_ip" name="vhost_ip"><br>
+        <label for="vhost_path">VHost Path:</label>
+        <input type="text" id="vhost_path" name="vhost_path"><br>
+        <label for="settings">Settings:</label>
+        <textarea id="settings" name="settings"></textarea><br>
         <button type="submit">Add Website</button>
     </form>
 </body>
