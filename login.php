@@ -1,14 +1,17 @@
-// login.php
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 $servername = "localhost";
 $username = "root";
 $password = "";
 $dbname = "docker_management";
 
-// Създаване на връзка
+// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Проверка на връзката
+// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -26,7 +29,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $row = $result->fetch_assoc();
         if (password_verify($password, $row['password'])) {
             $_SESSION['username'] = $username;
-            header("Location: dashboard.php");
+            $_SESSION['user_id'] = $row['id'];
+            header("Location: user_home.php");
         } else {
             echo "Invalid password";
         }

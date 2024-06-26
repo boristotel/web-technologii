@@ -1,7 +1,9 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+session_start();
+if (!isset($_SESSION['username'])) {
+    header("Location: index.html");
+    exit();
+}
 
 $servername = "localhost";
 $username = "root";
@@ -16,15 +18,12 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = $_POST['username'];
-    $email = $_POST['email'];
-    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-
-    $sql = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password')";
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $sql = "DELETE FROM containers WHERE id='$id'";
 
     if ($conn->query($sql) === TRUE) {
-        header("Location: index.html");
+        header("Location: user_home.php");
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }
