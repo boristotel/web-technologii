@@ -43,8 +43,15 @@ if ($container['settings']) {
     $dockerfile .= "ENV SETTINGS=\"" . $container['settings'] . "\"\n";
 }
 
+// Create a directory for the container
+$directory = 'dockerfiles/' . $container['id'];
+if (!is_dir($directory)) {
+    mkdir($directory, 0777, true);
+}
+
 // Save Dockerfile to a file
-file_put_contents('Dockerfile', $dockerfile);
+$filepath = $directory . '/Dockerfile';
+file_put_contents($filepath, $dockerfile);
 
 header('Content-Type: text/plain');
 header('Content-Disposition: attachment; filename="Dockerfile"');
