@@ -30,7 +30,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $row['password'])) {
             $_SESSION['username'] = $username;
             $_SESSION['user_id'] = $row['id'];
-            header("Location: user_home.php");
+            $_SESSION['role'] = $row['role']; // Store the role in session
+
+            if ($row['role'] == 'user') {
+                header("Location: user_home.php");
+            } elseif ($row['role'] == 'admin') {
+                header("Location: admin_panel.php");
+            } else {
+                // Handle other roles if necessary
+                echo "Role not recognized";
+            }
+            exit;
         } else {
             echo "Invalid password";
         }
