@@ -43,7 +43,7 @@ if ($container['settings']) {
     $dockerfile .= "ENV SETTINGS=\"" . $container['settings'] . "\"\n";
 }
 if ($container['vhost_ip']) {
-    $dockerfile .= "ENTRYPOINT echo "Hello from vhost_ip:${VHOST_IP} with arguments ${@}" && tail -f /dev/null"
+    $dockerfile .= "ENTRYPOINT echo 'Hello from vhost_ip:${VHOST_IP} with arguments ${@}' && tail -f /dev/null"
 }
 
 // Create a directory for the container using the container name
