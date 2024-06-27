@@ -10,10 +10,9 @@ $username = "root";
 $password = "";
 $dbname = "docker_management";
 
-// Create connection
+
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
@@ -49,14 +48,13 @@ if ($container['vhost_ip']) {
 
 
 
-// Create a directory for the container using the container name
+
 $container_name_safe = preg_replace('/[^a-zA-Z0-9_-]/', '_', $container['dns_name']);
 $directory = 'dockerfiles/' . $container_name_safe;
 if (!is_dir($directory)) {
     mkdir($directory, 0777, true);
 }
 
-// Save Dockerfile to a file
 $filepath = $directory . '/Dockerfile';
 file_put_contents($filepath, $dockerfile);
 

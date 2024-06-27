@@ -1,20 +1,20 @@
 <?php
 session_start();
 
-// Check if user is logged in and is admin
+
 if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
-    header("Location: login.php"); // Redirect to login page if not logged in or not admin
+    header("Location: login.php"); 
     exit;
 }
 
-// Include database configuration
+
 require_once 'config.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $id = $_POST['id'];
     $username = $_POST['username'];
     $email = $_POST['email'];
-    $role = $_POST['role']; // Assuming role is selected from a dropdown or radio button
+    $role = $_POST['role']; 
 
     $stmt = $pdo->prepare("UPDATE users SET username = ?, email = ?, role = ? WHERE id = ?");
     $stmt->execute([$username, $email, $role, $id]);
@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     exit;
 }
 
-// Retrieve user details based on ID from URL parameter
+
 $id = $_GET['id'];
 $stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
 $stmt->execute([$id]);

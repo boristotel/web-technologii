@@ -7,10 +7,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = "";
     $dbname = "docker_management";
 
-    // Create connection
+
     $conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Check connection
+
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $row['password'])) {
             $_SESSION['username'] = $username;
             $_SESSION['user_id'] = $row['id'];
-            $_SESSION['role'] = $row['role']; // Store the role in session
+            $_SESSION['role'] = $row['role']; 
 
             if ($row['role'] == 'user') {
                 header("Location: user_home.php");
@@ -51,7 +51,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
 }
 
-// Redirect back to login page with error message
+
 header("Location: login.html");
 exit();
 ?>

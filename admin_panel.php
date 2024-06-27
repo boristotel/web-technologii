@@ -1,16 +1,15 @@
 <?php
 session_start();
 
-// Check if user is logged in and is admin
+
 if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
-    header("Location: login.php"); // Redirect to login page if not logged in or not admin
+    header("Location: login.php");
     exit;
 }
 
-// Include database configuration
+
 require_once 'config.php';
 
-// Fetch all users from the database
 $stmt = $pdo->query("SELECT * FROM users");
 $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>

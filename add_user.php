@@ -1,20 +1,19 @@
 <?php
 session_start();
 
-// Check if user is logged in and is admin
 if (!isset($_SESSION['username']) || $_SESSION['role'] !== 'admin') {
-    header("Location: login.php"); // Redirect to login page if not logged in or not admin
+    header("Location: login.php"); 
     exit;
 }
 
-// Include database configuration
+
 require_once 'config.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
-    $role = $_POST['role']; // Assuming role is selected from a dropdown or radio button
+    $role = $_POST['role']; 
 
     $stmt = $pdo->prepare("INSERT INTO users (username, password, email, role) VALUES (?, ?, ?, ?)");
     $stmt->execute([$username, $password, $email, $role]);

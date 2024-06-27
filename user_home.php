@@ -167,7 +167,7 @@ $conn->close();
         function confirmLogout() {
             var confirmLogout = confirm("Are you sure you want to log out from your profile?");
             if (confirmLogout) {
-                window.location.href = "logout.php"; // Redirect to logout script or URL
+                window.location.href = "logout.php"; 
             }
         }
     </script>
