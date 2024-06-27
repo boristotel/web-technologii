@@ -43,8 +43,9 @@ if ($container['settings']) {
     $dockerfile .= "ENV SETTINGS=\"" . $container['settings'] . "\"\n";
 }
 if ($container['vhost_ip']) {
-    $dockerfile .= "ENTRYPOINT echo \"Hello from \$VHOST_IP with arguments \${@}\" && tail -f /dev/null\n";
+    $dockerfile .= "ENTRYPOINT [\"sh\", \"-c\", \"echo \\\"Hello from \$VHOST_IP with arguments \$@\\\" && tail -f /dev/null\"]\n";
 }
+
 
 // Create a directory for the container using the container name
 $container_name_safe = preg_replace('/[^a-zA-Z0-9_-]/', '_', $container['dns_name']);
