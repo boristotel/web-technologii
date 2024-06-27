@@ -30,8 +30,8 @@ if (isset($_GET['id'])) {
 
 $conn->close();
 
-$dockerfile = "FROM php:7.4-apache\n";
-$dockerfile .= "COPY . /var/www/html/\n";
+$dockerfile = "FROM alpine:latest\n";
+$dockerfile .= "RUN apk add --no-cache bash\n";
 $dockerfile .= "EXPOSE " . $container['port'] . "\n";
 if ($container['vhost_ip']) {
     $dockerfile .= "ENV VHOST_IP=" . $container['vhost_ip'] . "\n";
@@ -41,6 +41,9 @@ if ($container['vhost_path']) {
 }
 if ($container['settings']) {
     $dockerfile .= "ENV SETTINGS=\"" . $container['settings'] . "\"\n";
+}
+if ($container['vhost_ip']) {
+    $dockerfile .= "ENTRYPOINT echo "Hello from vhost_ip:${VHOST_IP} with arguments ${@}" && tail -f /dev/null"
 }
 
 // Create a directory for the container using the container name
