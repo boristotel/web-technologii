@@ -43,8 +43,9 @@ if ($container['settings']) {
     $dockerfile .= "ENV SETTINGS=\"" . $container['settings'] . "\"\n";
 }
 if ($container['vhost_ip']) {
-    $dockerfile .= "ENTRYPOINT [\"sh\", \"-c\", \"echo \\\"Hello from \$VHOST_IP with arguments \$@\\\" && sleep infinity\"]\n";
+    $dockerfile .= "ENTRYPOINT [\"sh\", \"-c\", \"echo \\\"Hello from \$VHOST_IP with arguments \$@\\\"; while true; do sleep 3600; done\"]\n";
 }
+
 
 
 
