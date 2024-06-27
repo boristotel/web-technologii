@@ -1,29 +1,28 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "docker_management";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $dbname = "docker_management";
+
+    // Create connection
+    $conn = new mysqli($servername, $username, $password, $dbname);
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $sql = "SELECT * FROM users WHERE username='$username'";
-    $result = $conn->query($sql);
+    $sql = "SELECT * FROM users WHERE username=?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
@@ -34,20 +33,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($row['role'] == 'user') {
                 header("Location: user_home.php");
+                exit();
             } elseif ($row['role'] == 'admin') {
                 header("Location: admin_panel.php");
+                exit();
             } else {
-                // Handle other roles if necessary
-                echo "Role not recognized";
+                $_SESSION['error'] = "Role not recognized";
             }
-            exit;
         } else {
-            echo "Invalid password";
+            $_SESSION['error'] = "Invalid password";
         }
     } else {
-        echo "No user found with this username";
+        $_SESSION['error'] = "No user found with this username";
     }
+
+    $stmt->close();
+    $conn->close();
 }
 
-$conn->close();
+// Redirect back to login page with error message
+header("Location: login.html");
+exit();
 ?>
