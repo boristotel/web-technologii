@@ -209,8 +209,7 @@ $conn->close();
                     <td>
                         <a href='edit_container.php?id=".$row['id']."'>Edit</a> |
                         <a href='delete_container.php?id=".$row['id']."'>Delete</a> |
-                        <a href='generate_dockerfile.php?id=".$row['id']."'>Generate Dockerfile</a> |
-                        <a href='run_container.php?id=".$row['id']."'>Run</a>
+                        <a href='generate_dockerfile.php?id=".$row['id']."'>Generate Dockerfile</a>
                     </td>
                 </tr>";
             }
@@ -219,10 +218,10 @@ $conn->close();
         }
         ?>
     </table>
-    <a href="add_container.html">Add New Container</a>
+        <a href="add_container.html">Add New Container</a>
 
-    <h2>Your Websites</h2>
-    <table border="1">
+        <h2>Your Websites</h2>
+        <table border="1">
         <tr>
             <th>DNS Name</th>
             <th>Port</th>
@@ -235,9 +234,10 @@ $conn->close();
         <?php
         if ($websites_result->num_rows > 0) {
             while($row = $websites_result->fetch_assoc()) {
+                $port = strlen($row['port']) > 5 ? substr($row['port'], 0, 5) . '...' : $row['port']; // Limit port to 5 characters
                 echo "<tr>
                     <td>".$row['dns_name']."</td>
-                    <td>".$row['port']."</td>
+                    <td>".$port."</td>
                     <td>".$row['db_name']."</td>
                     <td>".$row['vhost_ip']."</td>
                     <td>".$row['vhost_path']."</td>
@@ -252,7 +252,8 @@ $conn->close();
             echo "<tr><td colspan='7'>No websites found</td></tr>";
         }
         ?>
-    </table>
+</table>
+
     <a href="add_website.html">Add New Website</a>
 
     <h2>Your Virtual Machines</h2>

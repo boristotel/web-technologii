@@ -52,6 +52,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <title>Install Docker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2; /* Light gray background */
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: rgb(88, 166, 235); /* Blue color */
+        }
+        button {
+            padding: 15px 30px;
+            background-color: rgb(88, 166, 235); /* Blue color */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #5aadd8; /* Lighter shade of blue on hover */
+        }
+    </style>
     <script>
         function confirmRestart() {
             var restart = confirm("The system needs to be restarted to complete the Docker installation. Do you want to restart now?");
