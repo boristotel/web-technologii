@@ -2,11 +2,8 @@
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "docker_management";
-
+    
+    include 'config.php';
 
     $conn = new mysqli($servername, $username, $password, $dbname);
 

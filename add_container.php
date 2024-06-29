@@ -5,11 +5,7 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "docker_management";
-
+include 'config.php';
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 

@@ -1,9 +1,6 @@
 <?php
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "docker_management";
+include 'config.php';
 
 try {
   
